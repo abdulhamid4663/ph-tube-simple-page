@@ -24,7 +24,7 @@ async function loadVideosData(categoryId) {
 
 async function sortList(categoryId){
     const videos = await loadVideosData(categoryId);
-    const sortedVideosList = videos.sort((a,b) => parseFloat(b.others.views) - parseFloat(a.others.views) )
+    const sortedVideosList = videos.sort( (a,b) => parseFloat(b.others.views) - parseFloat(a.others.views) )
     
     showVideos(sortedVideosList)
 }
@@ -84,7 +84,7 @@ async function renderData() {
     showVideos(videoList)
 }
 
-function showBlogModal(){
-    my_modal_1.showModal()
+function toBlogBtn(){
+    window.location.href = "blog.html";
 }
 renderData()

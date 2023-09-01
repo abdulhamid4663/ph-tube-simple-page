@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PH Tube</title>
+
+    <!-- Tailwind and daisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- Custom Tailwind Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-color": '#FF1F3D',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Local CSS Styles -->
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section Starts -->
+    <header>
+        <div class="container mx-auto px-4">
+            <div
+                class="flex flex-wrap justify-between items-center pt-12 pb-8 gap-5">
+                <div>
+                    <a class="cursor-pointer">
+                        <img src="images/Logo.png" alt="Logo">
+                    </a>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <button onclick="toHome()"
+                        class="btn bg-primary-color text-lg text-white font-medium normal-case">Home</button>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </header>
+    <!-- Header Section Ends -->
+
+    <!-- Main Section Starts -->
+    <main>
+        <div class="container mx-auto px-4 py-14">
+            <div class="bg-slate-50 rounded-lg p-6 mb-8">
+                <h1 class="text-2xl text-[#171717] font-medium">Discuss the scope of var, let, and const</h1>
+                <p class="text-base text-[#252525] pt-2 pb-3 pl-4">var and let and const is the keywords to declare
+                    a variable in the javascript.</p>
+                <ul class="text-base text-[#252525B2] pl-4">
+                    <li class="py-1">1. var is a function/global scoped and it can be redeclare and it can be
+                        reassigned</li>
+                    <li class="py-1">2. let is a block scoped and it can't be redeclare but can be reassigned</li>
+                    <li class="py-1">3. const is a block scoped and it can't be redeclare and can't be reassigned
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-slate-50 rounded-lg p-6 mb-8">
+                <h1 class="text-2xl text-[#171717] font-medium">Tell us the use cases of null and undefined</h1>
+                <h1 class="text-lg text-[#252525] pt-4">Undefined:</h1>
+                <p class="text-base text-[#252525B2] pt-2 pb-3 pl-4">Undefined means is an empty it means not
+                    defined or not assigned yet and it has many ways to get undefined.</p>
+                <h1 class="text-lg text-[#252525] pt-2">Null:</h1>
+                <p class="text-base text-[#252525B2] pt-2 pb-3 pl-4">null means is an empty or not exists</p>
+            </div>
+            <div class="bg-slate-50 rounded-lg p-6">
+                <h1 class="text-2xl text-[#171717] font-medium">What do you mean by REST API?</h1>
+                <p class="text-base text-[#252525B2] pt-2 pb-3 pl-4">REST API is an api or application programming
+                    interface it goes through the server and searches for the data that user wanted and it goes back
+                    whether is found the data or not.</p>
+            </div>
+        </div>
+    </main>
+    <!-- Main Section Ends -->
+
+    <!-- Scripts -->
+    <script src="js/blog.js"></script>
+</body>
+
+</html>
