@@ -1,51 +1,44 @@
-const loadCategories = async (isSorted) => { // Load Categories Data
+async function loadCategories() {
     const res = await fetch('https://openapi.programming-hero.com/api/videos/categories');
     const data = await res.json();
     const categories = data.data;
 
-    showCategories(categories, isSorted);
-};
+    return categories;
+}
 
-const showCategories = (categories, isSorted) => { // Show Categories Data
-    const categoriesContainer = document.getElementById('categories-container');
-    categoriesContainer.textContent = '';
+async function loadCategoriesList(categoryId) {
+    const videosList = await loadVideosData(categoryId);
+    showVideos(videosList)
+}
 
-    categories.forEach(category => { // Each Category Data
-        const newDiv = document.createElement('div');
-        newDiv.innerHTML = `
-            <button onclick="loadVideosData('${category.category_id}', '${isSorted}')" class="btn text-lg font-medium text-[#252525B2] normal-case">${category.category}</button>
-            `;
-        categoriesContainer.appendChild(newDiv);
-    });
-};
-
-const loadVideosData = async (videosId, isSorted) => { // Load Videos Data
-    const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${videosId}`);
-    const data = await res.json();
-    let videos = data.data;
-
-    if (isSorted === "true") {
-        videos = videos.sort((a, b) => parseFloat(b.others.views) - parseFloat(a.others.views));
-    };
+async function loadVideosData(categoryId) {
+    const sortBtn = document.querySelector("#sortBtn");
+    sortBtn.value = categoryId;
     
-    showVideos(videos);
-};
+    const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
+    const data = await res.json();
+    const videos = data.data;
+    
+    return videos;
+}
 
-const showVideos = (videos) => { // Show Videos Data
-    const videosContainer = document.getElementById('videos-container');
-    const errorDiv = document.getElementById('errorDiv'); 
+async function sortList(categoryId){
+    const videos = await loadVideosData(categoryId);
+    const sortedVideosList = videos.sort((a,b) => parseFloat(b.others.views) - parseFloat(a.others.views) )
+    
+    showVideos(sortedVideosList)
+}
 
-    if (videos.length === 0) {
-        errorDiv.classList.add('flex');
-        errorDiv.classList.remove('hidden');
-    } else {
-        errorDiv.classList.add('hidden');
-    };
-
+async function showVideos(videos){
+    const videosContainer = document.getElementById('videos-container')
     videosContainer.textContent = "";
-    videos.forEach(video => { // Each Videos Data
+
+    const errorDiv = document.getElementById('errorDiv');
+    videos.length === 0 ? errorDiv.classList.remove('hidden') : errorDiv.classList.add('hidden')
+
+    videos.forEach(video => {
         const newDiv = document.createElement('div');
-        
+
         const seconds = Number.parseInt(video?.others?.posted_date);
         const toMinutes = seconds / 60;
         const minutesFormat = Number.parseInt(toMinutes % 60);
@@ -63,7 +56,7 @@ const showVideos = (videos) => { // Show Videos Data
                         <h2 class="card-title text-base font-bold text-[#171717] cursor-pointer">${video?.title ? video.title : ""}</h2>
                         <div class="flex gap-2 items-center">
                             <a class="link link-hover text-sm font-normal text-[#171717B2]">${video.authors[0].profile_name}</a>
-                            ${video?.authors[0]?.verified === false || video?.authors[0]?.verified === "" ? "" : `<p><img src="./images/tickmark.png" class="cursor-pointer"></p>`}
+                            ${video?.authors[0]?.verified === false || video?.authors[0]?.verified === "" ? "" : `<p><img src="./images/tick-mark.png" class="cursor-pointer"></p>`}
                         </div>
                         <p class="text-sm font-normal text-[#171717B2] pt-2">${video?.others?.views} views</p>
                     </div>
@@ -72,15 +65,26 @@ const showVideos = (videos) => { // Show Videos Data
         `;
         videosContainer.appendChild(newDiv);
     });
-};
+}
 
-const sortByView = () => {
-    loadCategories(true);
-};
+async function renderData() {
+    const categories = await loadCategories();
 
-const showBlogModal = () => {
+    const categoriesContainer = document.getElementById('categories-container');
+
+    categories.forEach(category => {
+        const newDiv = document.createElement('div');
+        newDiv.innerHTML = `
+            <button onclick="loadCategoriesList('${category.category_id}')" class="btn text-lg font-medium text-[#252525B2] normal-case">${category.category}</button>
+            `;
+        categoriesContainer.appendChild(newDiv);
+    });
+
+    const videoList = await loadVideosData(categories[0].category_id)
+    showVideos(videoList)
+}
+
+function showBlogModal(){
     my_modal_1.showModal()
-};
-
-loadCategories();
-loadVideosData("1000");
+}
+renderData()

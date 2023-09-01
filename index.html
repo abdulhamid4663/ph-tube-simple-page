@@ -40,17 +40,18 @@
     <!-- Header Section Starts -->
     <header>
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center pt-12 pb-8">
+            <div
+                class="flex flex-col lg:flex-row flex-wrap justify-center lg:justify-between items-center pt-12 pb-8 gap-5 lg:gap-0">
                 <div>
                     <a class="cursor-pointer">
                         <img src="images/Logo.png" alt="Logo">
                     </a>
                 </div>
-                <div>
-                    <button onclick="sortByView()" class="btn text-[#252525] text-lg font-medium normal-case">Sort by
-                        view</button>
+                <div class="order-2 lg:order-1">
+                    <button id="sortBtn" onclick="sortList(this.value)"
+                        class="btn text-[#252525] text-lg font-medium normal-case">Sort by Views</button>
                 </div>
-                <div>
+                <div class="order-1 lg:order-2">
                     <button onclick="showBlogModal()"
                         class="btn bg-primary-color text-lg text-white font-medium normal-case">Blog</button>
                 </div>
@@ -64,19 +65,30 @@
             <form method="dialog" class="modal-box max-w-3xl">
                 <div class="bg-slate-50 rounded-lg p-6 mb-8">
                     <h1 class="text-2xl text-[#171717] font-medium">Discuss the scope of var, let, and const</h1>
-                    <p class="text-base text-[#252525] pt-2 pb-3 pl-4">var and let and const is the keywords to declare a variable in the javascript.</p>
+                    <p class="text-base text-[#252525] pt-2 pb-3 pl-4">var and let and const is the keywords to declare
+                        a variable in the javascript.</p>
                     <ul class="text-base text-[#252525B2] pl-4">
-                        <li class="py-1">1. var is a function/global scoped and it can be redeclare and it can be reassigned</li>
+                        <li class="py-1">1. var is a function/global scoped and it can be redeclare and it can be
+                            reassigned</li>
                         <li class="py-1">2. let is a block scoped and it can't be redeclare but can be reassigned</li>
-                        <li class="py-1">3. const is a block scoped and it can't be redeclare and can't be reassigned</li>
+                        <li class="py-1">3. const is a block scoped and it can't be redeclare and can't be reassigned
+                        </li>
                     </ul>
                 </div>
-                <div class="bg-slate-50 rounded-lg p-6">
+                <div class="bg-slate-50 rounded-lg p-6 mb-8">
                     <h1 class="text-2xl text-[#171717] font-medium">Tell us the use cases of null and undefined</h1>
-                    <p class="text-base text-[#252525] pt-2 pb-3 pl-4">Undefined means is an empty it means not defined or not assigned yet and it has many ways to get undefined.</p>
-                    <p class="text-base text-[#252525] pt-2 pb-3 pl-4">null means is an empty or not exists</p>
+                    <h1 class="text-lg text-[#252525] pt-4">Undefined:</h1>
+                    <p class="text-base text-[#252525B2] pt-2 pb-3 pl-4">Undefined means is an empty it means not
+                        defined or not assigned yet and it has many ways to get undefined.</p>
+                    <h1 class="text-lg text-[#252525] pt-2">Null:</h1>
+                    <p class="text-base text-[#252525B2] pt-2 pb-3 pl-4">null means is an empty or not exists</p>
                 </div>
-                <h1>What do you mean by REST API?</h1>
+                <div class="bg-slate-50 rounded-lg p-6">
+                    <h1 class="text-2xl text-[#171717] font-medium">What do you mean by REST API?</h1>
+                    <p class="text-base text-[#252525B2] pt-2 pb-3 pl-4">REST API is an api or application programming
+                        interface it goes through the server and searches for the data that user wanted and it goes back
+                        whether is found the data or not.</p>
+                </div>
                 <div class="modal-action">
                     <!-- if there is a button in form, it will close the modal -->
                     <button class="btn">Close</button>
@@ -92,7 +104,7 @@
         <div class="container mx-auto px-4">
             <!-- Categories Section Starts -->
             <section>
-                <div id="categories-container" class="flex justify-center gap-6 pt-8">
+                <div id="categories-container" class="flex flex-wrap justify-center gap-6 pt-8">
                     <!-- Categories goes here... -->
                 </div>
             </section>
@@ -105,7 +117,7 @@
                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         <!-- Videos goes here... -->
                     </div>
-                    <div id="errorDiv" class="justify-center items-center h-[50vh] hidden">
+                    <div id="errorDiv" class="flex justify-center items-center h-[50vh] hidden">
                         <div class="text-center">
                             <img src="./images/Icon.png" alt="Error Icon" class="mx-auto">
                             <p class="text-[#171717] text-3xl font-bold max-w-[27.0625rem] pt-8">Oops!! Sorry, There is
